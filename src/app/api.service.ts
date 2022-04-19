@@ -47,6 +47,17 @@ export class ApiService {
       }),
     }).then(x => x.json())
   }
+
+  loadCollectionItems(
+    contractAddress: string,
+    selectedRarityMethod: string,
+  ): Promise<CollectionItem[]> {
+    return fetch(
+      `${this.url}/collection/${contractAddress}?rarityMethod=${selectedRarityMethod}`,
+    )
+      .then(x => x.json())
+      .then(x => x.items)
+  }
 }
 
 export type QueueItem = {
@@ -67,4 +78,16 @@ export type Collection = {
   symbol: string
   totalSupply: number
   isReady: boolean
+}
+
+export type CollectionItem = {
+  itemId: number
+  rank: number
+  name: string
+  description: string
+  imageUrl: string
+  attributes: {
+    trait_type: string
+    value: string
+  }[]
 }

@@ -38,7 +38,12 @@
           </ion-label>
         </ion-card-content>
         <ion-footer class="ion-padding">
-          <ion-button color="tertiary" [disabled]="!item.isReady">
+          <ion-button
+            color="tertiary"
+            [disabled]="!item.isReady"
+            [routerLink]="['/collection', item.contractAddress]"
+            [queryParams]="{title: item.name}"
+          >
             View Collection
           </ion-button>
           <ion-button color="danger" (click)="deleteCollection(item)">

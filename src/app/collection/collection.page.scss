@@ -1,0 +1,17 @@
+main {
+  padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+ion-card {
+  width: 350px;
+
+  img {
+    max-width: 310px;
+  }
+}
+
+ion-segment-button {
+  min-width: 140px;
+}
