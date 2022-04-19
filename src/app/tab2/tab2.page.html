@@ -1,17 +1,53 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title> Collections </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Collections</ion-title>
+      <div slot="end" class="actions">
+        <small>
+          <span>Last refresh at:</span>
+          {{ lastUpdatedAt | date: 'mediumTime' }}
+        </small>
+        <ion-button
+          color="secondary"
+          (click)="refresh()"
+          size="small"
+        >
+          Refresh
+        </ion-button>
+      </div>
     </ion-toolbar>
   </ion-header>
+  <main>
+    <ng-container *ngIf="items.length; else Empty">
+      <ion-card *ngFor="let item of items" color="dark">
+        <ion-card-header>
+          <ion-card-subtitle>
+            {{ item.contractAddress }}
+          </ion-card-subtitle>
+          <ion-card-title>{{ item.name }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label>
+            Total Supply: {{ item.totalSupply }}
+          </ion-label>
+        </ion-card-content>
+        <ion-footer class="ion-padding">
+          <ion-button color="tertiary" [disabled]="!item.isReady">
+            View Collection
+          </ion-button>
+          <ion-button color="danger" (click)="deleteCollection(item)">
+            Delete Collection
+          </ion-button>
+        </ion-footer>
+      </ion-card>
+    </ng-container>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ng-template #Empty> No items found </ng-template>
+  </main>
 </ion-content>

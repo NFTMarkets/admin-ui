@@ -1,0 +1,30 @@
+main {
+  padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+ion-card {
+  ion-footer {
+    text-align: center;
+    display: flex;
+
+    ion-button {
+      flex: 1;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  span {
+    color: gray;
+    margin-right: 4px;
+  }
+
+  ion-button {
+    margin-left: 10px;
+  }
+}

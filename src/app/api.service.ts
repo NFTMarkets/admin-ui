@@ -1,0 +1,70 @@
+import { Injectable } from '@angular/core'
+
+@Injectable({ providedIn: 'root' })
+export class ApiService {
+  url = 'http://localhost:8000'
+
+  loadQueueItems(): Promise<QueueItem[]> {
+    return fetch(`${this.url}/queue`).then(x => x.json())
+  }
+
+  loadCollections(): Promise<Collection[]> {
+    return fetch(`${this.url}/collections`).then(x => x.json())
+  }
+
+  addContract(contractAddress: string) {
+    return fetch(`${this.url}/register-collection`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        contractAddress,
+      }),
+    }).then(x => x.json())
+  }
+
+  retrySyncProcess(contractAddress: string) {
+    return fetch(`${this.url}/reset-queue-item`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        contractAddress,
+      }),
+    }).then(x => x.json())
+  }
+
+  deleteCollection(contractAddress: string) {
+    return fetch(`${this.url}/delete-collection`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        contractAddress,
+      }),
+    }).then(x => x.json())
+  }
+}
+
+export type QueueItem = {
+  id: string
+  contractAddress: string
+  attributesAnalysed: boolean
+  formulasApplied: boolean
+  itemsDownloaded: boolean
+  priceHistoryLoaded: boolean
+  downloadProgress: number
+  error?: string
+  syncError?: string
+}
+
+export type Collection = {
+  contractAddress: string
+  name: string
+  symbol: string
+  totalSupply: number
+  isReady: boolean
+}

@@ -1,17 +1,68 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title> Queue </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large"> Queue </ion-title>
+      <div slot="end" class="actions">
+        <small>
+          <span>Last refresh at:</span>
+          {{ lastUpdatedAt | date: 'mediumTime' }}
+        </small>
+        <ion-button
+          color="secondary"
+          (click)="refresh()"
+          size="small"
+        >
+          Refresh
+        </ion-button>
+        <ion-button color="tertiary" (click)="addNew()" size="small">
+          Add New
+        </ion-button>
+      </div>
     </ion-toolbar>
   </ion-header>
+  <main>
+    <ion-list *ngIf="items.length; else Empty">
+      <ng-container *ngFor="let item of items">
+        <ion-item-sliding>
+          <ion-item-options side="start">
+            <ion-item-option
+              color="danger"
+              expandable
+              (click)="deleteCollection(item)"
+            >
+              Delete
+            </ion-item-option>
+          </ion-item-options>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+          <ion-item>
+            <ion-label>
+              {{item.contractAddress}}
+              <ion-icon
+                *ngIf="item.error"
+                name="warning-outline"
+                color="danger"
+                class="pointer"
+                (click)="showError(item)"
+              ></ion-icon>
+            </ion-label>
+            <ion-note>{{item.downloadProgress}}%</ion-note>
+            <ion-note>
+              Attributes: {{item.attributesAnalysed?'✅' :'⏱' }}
+            </ion-note>
+            <ion-note>
+              Formulas: {{item.formulasApplied?'✅' :'⏱' }}
+            </ion-note>
+          </ion-item>
+        </ion-item-sliding>
+      </ng-container>
+    </ion-list>
+
+    <ng-template #Empty> No items found </ng-template>
+  </main>
 </ion-content>

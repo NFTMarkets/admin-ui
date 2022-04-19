@@ -1,0 +1,27 @@
+main {
+  padding-top: 30px;
+}
+
+ion-list {
+  ion-note {
+    margin-left: 14px;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  span {
+    color: gray;
+    margin-right: 4px;
+  }
+
+  ion-button {
+    margin-left: 10px;
+  }
+}
