@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core'
+import { environment } from '../environments/environment'
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  url = 'http://localhost:8000'
+  url = environment.apiUrl
 
   loadQueueItems(): Promise<QueueItem[]> {
     return fetch(`${this.url}/queue`).then(x => x.json())
