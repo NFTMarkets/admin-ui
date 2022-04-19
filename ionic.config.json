@@ -1,0 +1,7 @@
+{
+  "name": "nft-rarity-ui",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
