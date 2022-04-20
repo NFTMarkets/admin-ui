@@ -67,7 +67,7 @@ export type QueueItem = {
   attributesAnalysed: boolean
   formulasApplied: boolean
   itemsDownloaded: boolean
-  priceHistoryLoaded: boolean
+  transferHistoryLoaded: boolean
   downloadProgress: number
   error?: string
   syncError?: string
