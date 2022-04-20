@@ -36,7 +36,7 @@
       </div>
     </ion-toolbar>
   </ion-header>
-  <main>
+  <main *ngIf="!isLoading">
     <ng-container *ngIf="items.length; else Empty">
       <ng-container *ngFor="let item of items">
         <ion-card>
