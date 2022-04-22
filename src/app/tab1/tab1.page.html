@@ -42,7 +42,14 @@
 
           <ion-item>
             <ion-label>
-              {{item.contractAddress}}
+              <ion-button
+                size="small"
+                fill="clear"
+                target="_blank"
+                [href]="'https://etherscan.io/address/' + item.contractAddress"
+              >
+                {{ item.contractAddress }}
+              </ion-button>
               <ion-icon
                 *ngIf="item.error"
                 name="warning-outline"
